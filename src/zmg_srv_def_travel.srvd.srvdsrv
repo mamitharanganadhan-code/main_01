@@ -1,0 +1,6 @@
+@EndUserText.label: 'service definition for travel'
+define service Zmg_srv_def_travel {
+  expose zmg_projview_travel;
+  expose zmg_projview_booking;
+  expose zmg_projview_suppl;
+}

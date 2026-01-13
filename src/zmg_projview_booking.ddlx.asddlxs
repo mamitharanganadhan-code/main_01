@@ -1,0 +1,87 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+@UI.headerInfo: { typeName: 'Booking',
+                  typeNamePlural: 'Booking',
+                  title:{ type: #STANDARD,
+                          label :'Booking',
+                          value: 'BookingId'} }
+annotate entity zmg_projview_booking with
+{
+  @UI.facet: [{id:       'Booking',
+               purpose:   #STANDARD,
+               position:  10,
+               label:     'Booking',
+               type:      #IDENTIFICATION_REFERENCE },
+              {id:       'Supplement',
+               purpose:   #STANDARD,
+               position:  20,
+               label:     'Supplement',
+               type:      #LINEITEM_REFERENCE,
+               targetElement: '_booksuppl'}]
+  @UI:{ lineItem: [{position: 10  }],
+        identification: [{ position: 10 }] }
+  @Search.defaultSearchElement: true
+  TravelId;
+  @Search.defaultSearchElement: true
+  @UI:{ lineItem: [{position: 15} ],
+        identification: [{ position: 15 }] }
+  BookingId;
+  @UI:{ lineItem: [{position: 20} ],
+        identification: [{ position: 20 }] }
+  BookingDate;
+  @UI:{ lineItem: [{position: 30} ],
+        identification: [{ position: 30 }] }
+  @Search.defaultSearchElement: true
+  @Consumption.valueHelpDefinition: [{ entity:{ name: '/DMO/I_Customer', element: 'CustomerID'  } } ]
+  CustomerId;
+  @UI:{ lineItem: [{position: 40 } ],
+        identification: [{ position: 40 }] }
+  @Consumption.valueHelpDefinition: [{ entity:{ name: '/DMO/I_Carrier', element: 'AirlineID'  } } ]
+  CarrierId;
+  @UI:{ lineItem: [{position: 50} ],
+        identification: [{ position: 50 }] }
+  @Consumption.valueHelpDefinition: [{ entity:{ name: '/DMO/I_Flight', element: 'ConnectionID'  },
+                                       additionalBinding: [{element: 'ConnectionID' ,
+                                                            localElement: 'ConnectionId' },
+                                                           {element: 'AirlineID',
+                                                            localElement: 'CarrierId' },
+                                                           {element: 'CurrencyCode',
+                                                            localElement: 'CurrencyCode' },
+                                                            {element: 'CurrencyCode',
+                                                            localElement: 'FlightPrice' }] }] --- to get the value help for connection ID based on the above mentioned values
+  ConnectionId;
+  @UI:{ lineItem: [{position: 60} ],
+        identification: [{ position: 60 }] }
+  @Consumption.valueHelpDefinition: [{ entity:{ name: '/DMO/I_Flight', element: 'FlightDate'  },
+                                       additionalBinding: [{element: 'FlightDate' ,
+                                                            localElement: 'FlightDate' },
+                                                           {element: 'AirlineID',
+                                                            localElement: 'CarrierId' },
+                                                           {element: 'CurrencyCode',
+                                                            localElement: 'CurrencyCode' },
+                                                            {element: 'CurrencyCode',
+                                                            localElement: 'FlightPrice' }] }] --- to get the value help for flight date based on the above mentioned values
+
+  FlightDate;
+  @UI:{ lineItem: [{position: 70} ],
+        identification: [{ position: 70 }] }
+  FlightPrice;
+  @Consumption.valueHelpDefinition: [{ entity:{ name: 'I_Currency', element: 'Currency'  } } ]
+  CurrencyCode;
+  @UI:{ lineItem: [{position: 75 } ],
+        identification: [{ position: 75 }],
+        textArrangement: #TEXT_ONLY  }
+  @Consumption.valueHelpDefinition: [{ entity:{ name : '/DMO/I_Booking_Status_VH', element: 'BookingStatus'  } } ]
+  BookingStatus;
+  @UI:{ lineItem: [{position:85 } ],
+        identification: [{ position: 85 }] }
+  LastChangedAt;
+  /* Associations */
+  //    _booking_status;
+  //    _booksuppl;
+  //    _carrier;
+  //    _connection;
+  //    _customer;
+  //    _travel;
+
+}

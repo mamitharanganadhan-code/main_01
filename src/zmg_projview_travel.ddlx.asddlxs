@@ -1,0 +1,69 @@
+@Metadata.layer: #CORE
+@Search.searchable: true
+@UI.headerInfo: { typeName: 'Travel',
+                  typeNamePlural: 'Travels',
+                  title:{ type: #STANDARD,
+                          label :'Travel',
+                          value: 'TravelID'} }
+annotate entity zmg_projview_travel with
+{
+  @UI.facet : [{id:       'Travel',
+               purpose:   #STANDARD,
+               position:  10,
+               label:     'Travel',
+               type:      #IDENTIFICATION_REFERENCE },
+               { id:      'Booking',
+               purpose:   #STANDARD,
+               position:  20,
+               label:    'Booking',
+               type:      #LINEITEM_REFERENCE,
+               targetElement: '_cbooking' }]
+
+  @UI:{ lineItem: [{  position : 10 ,
+                  label: 'TravelId' }] ,
+  selectionField: [{ position : 10 }],
+  identification: [{ position: 10 }]  }
+  @Search.defaultSearchElement: true
+  TravelId;
+  @UI:{ lineItem: [{  position : 20 }],
+        selectionField: [{ position : 20 }],
+        identification: [{ position: 20  }]  }
+  @Consumption.valueHelpDefinition: [{ entity:{ name: '/DMO/I_Agency', element: 'AgencyID'  } } ]
+  AgencyId;
+  //    AgencyName;
+  @UI:{ lineItem: [{  position : 30 }],
+   selectionField: [{ position : 40 }],
+   identification: [{ position: 30 }]  }
+  @Search.defaultSearchElement: true
+  @Consumption.valueHelpDefinition: [{ entity:{ name: '/DMO/I_Customer', element: 'CustomerID'  } } ]
+  CustomerId;
+  //  CustomerName;
+  @UI.lineItem: [{  position : 40 }]
+  @UI.identification: [{ position: 40 }]
+  BeginDate;
+  @UI.lineItem: [{  position : 50 }]
+  @UI.identification: [{ position: 45 }]
+  EndDate;
+  //  BookingFee;
+  @UI.lineItem: [{  position : 60 }]
+  @UI.identification: [{ position: 50 }]
+  TotalPrice;
+  @Consumption.valueHelpDefinition: [{ entity:{ name: 'I_Currency', element: 'Currency'  } } ]
+  CurrencyCode;
+  //  Description;
+  @UI:{ lineItem:        [{  position : 70 }],
+        selectionField:  [{  position : 60 }],
+        identification:  [{ position: 60 }],
+        textArrangement: #TEXT_ONLY  }     ----if the value is name( n ), it will return name & avoid the bracket value
+  @Search.defaultSearchElement: true
+  @Consumption.valueHelpDefinition: [{ entity:{ name: '/DMO/I_Overall_Status_VH', element: 'OverallStatus'  } } ]
+  OverallStatus;
+  //  Text;
+  /* Associations */
+  //  _agency;
+  //  _cbooking;
+  //  _currency;
+  //  _customer;
+  //  _status;
+
+}

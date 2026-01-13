@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service definition for the List Report'
+define service Zmg_srv_definition_list {
+  expose zmg_list_data_definition;
+  expose zmg_2_facet_data_def;
+}
